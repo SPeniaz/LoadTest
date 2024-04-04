@@ -11,7 +11,7 @@ RunLoadTestSB(records1);
 
 var records2 = GenerateSampleData(numerOfRecords);
 var sb = new StringBuilder();
-RunLoadTestSBAsInput(records2, sb);
+RunLoadTestSBAsInput(records2);
 
 var records3 = GenerateSampleData(numerOfRecords);
 RunLoadTestSwitchCase(records3);
@@ -45,7 +45,7 @@ static void RunLoadTestSB(Message_SR_12_2_ESME[] records)
     Console.WriteLine($"Total execution time: {stopwatch.ElapsedMilliseconds} milliseconds");
 }
 
-static void RunLoadTestSBAsInput(Message_SR_12_2_ESME[] records, StringBuilder sb)
+static void RunLoadTestSBAsInput(Message_SR_12_2_ESME[] records)
 {
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("String Builder as parameter");
@@ -55,7 +55,7 @@ static void RunLoadTestSBAsInput(Message_SR_12_2_ESME[] records, StringBuilder s
     Stopwatch stopwatch = Stopwatch.StartNew();
     foreach (var record in records)
     {
-        StringReplace.ESMEVariantMappingSB(record, sb);
+        StringReplace.ESMEVariantMappingSB(record, new StringBuilder(record.ESMEVariant, record.ESMEVariant!.Length*2));
     }
     stopwatch.Stop();
 
